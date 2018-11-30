@@ -1,4 +1,4 @@
-print("Welcome to our km2miles conversion program...")
+print("Welcome to our kilometer-miles conversion program...")
 while True: #loop indefinitely, we'll break if needed
     unit = "kilometers"
     ismi2km = raw_input("Do you wish to convert miles to km? (y/n)  ").lower()
