@@ -1,26 +1,45 @@
-import QuadraticEquationSolver as qes
 
-def read_coefficient(c):
-    inp = raw_input("Enter a coefficient for '%s': " % c)
-    neg = True if inp != "" and inp[0] == '-' else False #check for negative sign...
-    while not inp.replace('.', '', 1).replace('-', '', 1).isdigit(): #while invalid input...
-        print("You must enter an integer or a real number...")
-        inp = raw_input("Enter a coefficient for '%s': " % c)
-        if inp == "": return 0 #if empty string, return 0
-        neg = True if inp[0] == '-' else False
-        #mind how we only check for '-' and no longer for empty string
-        #because if inp was empty, we would've returned 0...
-    return -float(inp) if neg else float(inp)
+def _is_iteratable(i):
+    try:
+        iter(i)
+    except TypeError:
+        return False
+    else:
+        return True
 
-def main():
-    stop = ""
-    while stop != "y" or stop != "yes":
-        coefficients = [] #empty list where we'll put our coefficients
-        labels = ["a", "b", "c"] #labels to be passed on to 'read_coefficient()'
-        for i in range(3): #read the 3 coefficients...
-            coefficients.append(read_coefficient(labels[i]))
-        print(qes.solve_quadratic(coefficients))
-        stop = raw_input("Do you want to solve another equation? (y/n) ")
+def sum_of_iteratable(iteratable):
+    sum = 0
+    if type(iteratable) == dict: iteratable = iteratable.values()
+    for i in iteratable:
+        if type(i) == str:
+            continue #skip strings
+        elif _is_iteratable(i):
+            sum += sum_of_iteratable(i) #recursive call
+        else: #must be numeric or complex type...
+            try: #try to add, if exception occurs, just continue
+                sum += iteratable[i]
+            except TypeError:
+                continue
+    return sum
 
-if __name__ == "__main__":
-    main()
+def factorial(n):
+    assert type(n) == int, "Type of 'n' must be integer."
+    result = 1
+    for i in range(2, n+1):
+        result *= i
+
+def factorial_recursive(n):
+    assert type(n) == int, "Type of 'n' must be integer."
+    if n <= 1: return 1
+    else: return n*factorial_recursive(n-1)
+
+def sum_of_first_n(n):
+    assert type(n) == int, "Type of 'n' must be integer."
+    result = 0
+    for i in range(1,n+1):
+        result += i
+
+def sum_of_first_n_recursive(n):
+    assert type(n) == int, "Type of 'n' must be integer."
+    if n <= 0: return 0
+    else: return n+sum_of_first_n_recursive(n-1)

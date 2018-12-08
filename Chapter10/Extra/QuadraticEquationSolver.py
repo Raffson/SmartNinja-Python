@@ -79,24 +79,23 @@ if __name__ == "__main__":
     #You should run main.py in order to interact with the program...
     print("Testing QuadraticEquationSolver...")
     print("==================================")
-    print("Testing _get_discriminant:")
+    print("Testing _get_discriminant: "),
+    #note the comma in the above statement, it will suppress the newline
 
     D = _get_discriminant(1,2,3)
     assert D == -8, "Test for _get_discriminant failed,\n" \
     "target = 2^2 - 4*1*3 = 4 - 12 = -8\nactual = {}".format(D)
 
-    print("Test _get_discriminant passed!")
-    print("------------------------------")
-    print("Testing _complex_solutions:")
+    print("\t[PASS!]")
+    print("Testing _complex_solutions:"),
 
     real, imag = _complex_solutions(1,2,4)
     assert real == -1 and imag == 1, "Test for _complex_solutions failed,\n" \
     "target 'real' = -1\nactual 'real'= {}"\
     "target 'imag' = 1\nactual 'imag'= {}".format(real, imag)
 
-    print("Test _complex_solutions passed!")
-    print("------------------------------")
-    print("Testing _check_coefficients:")
+    print("\t[PASS!]")
+    print("Testing _check_coefficients:"),
 
     result = _check_coefficients([1,2,3])
     assert result == "", "Test for _check_coefficients failed\n"\
@@ -119,9 +118,8 @@ if __name__ == "__main__":
     result = _check_coefficients([1,2,"three"])
     assert result == target,assertmsg.format(target, result)
 
-    print("Test _check_coefficients passed!")
-    print("--------------------------------")
-    print("Testing solve_quadratic:")
+    print("\t[PASS!]")
+    print("Testing solve_quadratic:"),
 
     assertmsg = "Test for solve_quadratic failed\n"\
         "Output is different from expected value\n"\
@@ -142,6 +140,6 @@ if __name__ == "__main__":
     result = solve_quadratic([1,2,1])
     assert result == target, assertmsg.format(target, result)
 
-    print("Test solve_quadratic passed!")
+    print("\t[PASS!]")
     print("================================")
     print("All tests passed!")
