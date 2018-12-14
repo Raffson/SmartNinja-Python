@@ -139,9 +139,17 @@ class LinkedList(object):
             obj = self[obj] #same as calling self.__getitem__(obj)
             #we now have the element which needs to be deleted...
         if self.start == obj: #in case we're deleting the first element,
+            if obj.nextt == None: #in case this is the only element in the list...
+                self.start = None
+                self.end = None
+                self.size = 0
+                return
+            #if we haven't returned, we have more than 1 element and thus "safe"...
             obj.nextt.prev = None #"cut off" second element's previous
             self.start = self.start.nextt #second element is now our start...
         elif self.end == obj: #in case we're deleting the last element,
+        #no need to check if this is the only element,
+        #cause in that case we would've fallen into the previous block (self.start == obj)
             obj.prev.nextt = None #"cut off" second last's next,
             self.end = self.end.prev #second last element is now our end...
         else: #otherwise...
@@ -149,20 +157,28 @@ class LinkedList(object):
             #then 1's (which is 2's prev) next must become 3
             #and 3's (which is 2's next) prev must become 1
             obj.prev.nextt, obj.nextt.prev = (obj.nextt, obj.prev)
+        self.size -= 1 #decrement size with 1
 
 
 #what follows are examples of how to use the linked list...
 if __name__ == "__main__":
     ll = LinkedList() #initialize empty list
     ll.append(Node(1)) #some examples...
+    print("Size = %d" % len(ll))
     ll.append(Node(2))
+    print("Size = %d" % len(ll))
     ll.append(Node(3))
+    print("Size = %d" % len(ll))
     print(ll)
     print(ll[1])
     ll.remove(0)
+    print("Size = %d" % len(ll))
     ll.remove(ll[1])
+    print("Size = %d" % len(ll))
     ll.append("Hello")
+    print("Size = %d" % len(ll))
     ll.append("World")
+    print("Size = %d" % len(ll))
     nodes = [Node(0), Node(1), Node(2)] #link some nodes
     runner = None
     for i in range(len(nodes)-1):
@@ -172,4 +188,5 @@ if __name__ == "__main__":
     if runner != None: runner.nextt.prev = runner
     print(ll)
     ll.append(nodes[0]) #only append the first node...
+    print("Size = %d" % len(ll))
     print(ll)
