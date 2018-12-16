@@ -1,4 +1,4 @@
-import QuadraticEquationSolver as qes
+import quadratic_equation_solver as qes
 
 def read_coefficient(c):
     inp = ""
