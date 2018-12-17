@@ -1,6 +1,7 @@
 #this file will contain some helper functions to deal with input
 #via the command-line interface, making sure the input is valid...
 import datetime as dt
+import os
 
 #define a list of illegal characters w.r.t. filenames
 _illegalchars = ['\\', '/', '?', '%', '*', ':', '|', '\"', '<', '>']
@@ -41,9 +42,31 @@ def read_integer(msg="Enter an integer: "):
         id = raw_input(msg)
     return int(id)
 
+#will read & return a filename, making sure no illegal characters are present
 def read_filename(msg="Enter a filename: "):
     inp = raw_input(msg)
+    #mind that the expression "letter in inp for letter in _illegalchars"
+    # returns a list of booleans,
+    #any() basically checks in any of these booleans are true,
+    # if so, any() will return true, otherwise false
     while any(letter in inp for letter in _illegalchars):
         print("Invalid filename was specified, please try again...")
         inp = raw_input(msg)
     return inp
+
+#lists all csv-files in the current working directory
+# allows you to select one of these files and return the selected csv-file's name
+def select_csv_file(msg="Choose a file (enter the corresponding number): "):
+    #first get a list of all filenames in the current working directory that contain ".csv"
+    #i.e. all csv-files in the current working directory...
+    files = [f for f in os.listdir('.') if os.path.isfile(f) and ".csv" in f]
+    option = 0
+    for file in files: #list all the csv-files
+        print("{}: {}".format(option, file))
+        option += 1
+    if len(files) == 0: return "" #if there are no files, return empty string
+    index = read_integer(msg) #read the selection...
+    while index >= len(files): #while selection is out of bounds...
+        print("The given selection doesn't exist, please try again...")
+        index = read_integer(msg)
+    return files[index] #return selected file...

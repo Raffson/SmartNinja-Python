@@ -9,11 +9,17 @@ import cli
 import datetime as dt
 import os
 
+#piece of code that's being used more than once
+#funtion takes 2 parameters which are strings
 def _common_code1(kmmsg, lsdmsg):
     km = cli.read_positive_float(kmmsg)
     ls = cli.read_date(lsdmsg)
     return (km, ls)
 
+#another piece of code that's being reused,
+#takes 2 parameters, the first being a string,
+#the second being a function that takes the string as argument,
+#but if and only if the sting is not empty...
 def _common_code2(inp, func):
     if inp == "": func()
     else: func(inp)
@@ -22,10 +28,11 @@ class VManager(object):
     #constructor for VManager,
     #takes 1 mandatory argument:
     # -cname: type is expected to be string, raise TypeError otherwise
+    #       cname may not be an empty string, otherwise raise ValueError
     #initialize the object with cname and an empty dictionary
     def __init__(self, cname):
-        if type(cname) != str:
-            raise TypeError
+        if type(cname) != str: raise TypeError
+        if cname == "": raise ValueError
         self.cname = cname
         self.cars = {}
 
@@ -52,51 +59,82 @@ class VManager(object):
         if type(car) != Vehicle:
             raise TypeError
         if self.cars.has_key(car.GetID()):
-            msg = "Two different cars with the same ID exist!"
-            assert id(car) == id(self.cars[car.GetID()]), msg
+            if id(car) != id(self.cars[car.GetID()]): #should never be the case though...
+                print("Two different cars with the same ID exist!")
+                exit() #Quit the program cause things are so FUBAR, I don't even want to know...
             return False
         self.cars[car.GetID()] = car
         return True
 
-
+    #edits a car given the car's ID, the new number of km and the last service date
+    #thus expecting 3 mandatory parameters:
+    # -id: expecting this key to be present in self.cars, otherwise return (False, False)
+    # -km: expected to be of type int, float or str
+    #       in case of str, the string must represent a valid number,
+    #       otherwise (False, ?) will be returned
+    # -ls: expected to be of type str or datetime.date, otherwise return (?, False)
+    #       in case the date is in the future, (?, False) is also returned
+    #as for the return value, this is a tuple of 2 booleans
+    # these indicate (<result-of-EditKM>, <result-of-EditLastServiceDate>)
     def EditCar(self, id, km, ls):
         if self.cars.has_key(id):
-            self.cars[id].EditKM(km)
-            self.cars[id].EditLastServiceDate(ls)
-            return True
-        return False
+            return (self.cars[id].EditKM(km), self.cars[id].EditLastServiceDate(ls))
+        return (False, False)
 
-    def Write2File(self, fname="default.txt"):
+    #writes the output of "option 1" to a file
+    #if no filename is provided, <self.cname>.txt will be used
+    def Write2File(self, fname=None):
+        fname = self.cname+".txt" if fname == None else fname
         with open(fname, 'w+') as f:
             f.write(str(self))
 
-    def LoadFromCSV(self, fname="default.csv", clear=True):
+    #load cars from a CSV file
+    #takes 2 optional argumants:
+    # -fname: the name of the file to be used,
+    #           if fname isn't specified, <self.cname>.csv is used instead
+    #           if the given filename doesn't exist, the method simply returns
+    # -clear: a boolean value indicating whether or not
+    #           self.cars should be emptied before adding the cars from the file
+    def LoadFromCSV(self, fname=None, clear=True):
+        fname = self.cname+".csv" if fname == None else fname
+        if not os.path.isfile(fname): return #if the file doesn't exist, return
         if clear: self.cars = {}
-        #should check for a valid CSV file...
         with open(fname, 'r') as f:
             rows = f.read().split('\n')#split on newlines
             #check the first row, it should equal "brand,model,km,lastservice"
             if rows[0] != "brand,model,km,lastservice":
                 print("Can't interpret %s" % fname)
                 return
-            for row in rows[1:-1]:
-                cols = row.split(',')
+            for row in rows[1:]: #rows[1:]->take all rows starting from 1, i.e. drop the first row
+                cols = row.split(',') #returns a list with the columns
+                if len(cols) != 4: continue #skip incomplete rows...
                 if cols[2] == "": cols[2] = 0 #overwrite missing values
                 try:
-                    cols[2] = float(cols[2])
+                    cols[2] = float(cols[2]) #the km-value must be converted
                     car = Vehicle(cols[0], cols[1], cols[2], cols[3])
                 except ValueError:
+                    #exception can either occur in the conversion to float,
+                    #or in the construction of Vehicle...
+                    #eiter way, we want to ignore this row in both cases...
                     print("Skipping invalid row: %s" % row)
                     continue
                 self.AddCar(car)
 
-    def WriteToCSV(self, fname="default.csv"):
+    #writes all cars currently present in self.cars to a file in CSV format
+    #takes 1 optional argument, i.e. the filename
+    #which again is <self.cname>.csv if the filename is not provided...
+    def WriteToCSV(self, fname=None):
+        fname = self.cname+".csv" if fname == None else fname
         with open(fname, 'w+') as f:
             f.write("brand,model,km,lastservice\n")
             for id in self.cars:
                 f.write(self.cars[id].toCSVrow()+"\n")
 
+    #this function, as the name suggests, is the main loop of the program
+    #this is basically what you could call "user" code,
+    #i.e. code that uses the defined class(es) to achieve certain things...
     def Mainloop(self):
+        #define some messages
         mainmsg = "\nPlease choose one of following options: \n" \
             "1: See a list of all cars\n2: Add a new car\n" \
             "3: Edit kilometers and last service date\n" \
@@ -106,53 +144,50 @@ class VManager(object):
         lsdmsg = "Please enter the last service date D-M-Y: "
         idmsg = "Select an ID number to edit a vehicle: "
         fmsg = "Enter a name for the file: "
-        optmsg = "Choose an option: "
         while True:
             print(mainmsg)
             select = raw_input("Enter your selection 1, 2, 3, 4, 5, 6 or 7: ")
 
-            if select == "1":
+            if select == "1": #list of all cars
                 print(vman)
-            elif select == "2":
+            elif select == "2": #add a car
                 brand = raw_input("Enter the brand of the car: ")
                 model = raw_input("Enter the model of the car: ")
-                km, ls = _common_code1(kmmsg, lsdmsg)
-                self.AddCar(Vehicle(brand, model, float(km), ls))
-            elif select == "3":
+                km, ls = _common_code1(kmmsg, lsdmsg) #refactored code into function for reuse
+                if self.AddCar(Vehicle(brand, model, float(km), ls)):
+                    print("Successfully added a car!")
+                else: print("Failed to add a car!")
+            elif select == "3": #edit a car
                 print(self)
                 id = cli.read_integer(idmsg)
                 while not self.cars.has_key(id):
                     print("The given ID doesn't exist, please try again...")
                     id = cli.read_integer(idmsg)
                 km, ls = _common_code1(kmmsg, lsdmsg)
-                self.EditCar(id, km, ls)
-            elif select == "4":
+                success = self.EditCar(id, km, ls)
+                if success[0]: print("Successfully changed the number of kilometers!")
+                else: print("Failed to change the number of kilometers!")
+                if success[1]: print("Successfully changed the last service date!")
+                else: print("Failed to change the last service date!")
+            elif select == "4": #write list of cars to file
                 inp = cli.read_filename(fmsg)
                 _common_code2(inp, self.Write2File)
-            elif select == "5":
+            elif select == "5": #write cars to file in CSV format
                 inp = cli.read_filename(fmsg)
                 print(inp)
                 _common_code2(inp, self.WriteToCSV)
-            elif select == "6":
+            elif select == "6": #load cars from CSV file
                 print("Current working directory:\n%s" % os.getcwd())
-                files = [f for f in os.listdir('.') if os.path.isfile(f) and ".csv" in f]
-                option = 0
-                for file in files:
-                    print("{}: {}".format(option, file))
-                    option += 1
-                if len(files) == 0:
+                f = cli.select_csv_file()
+                if f == "":
                     print("No files present in the current working directory...")
                     continue
-                index = cli.read_integer(optmsg)
-                while index >= len(files):
-                    print("The given selection doesn't exist, please try again...")
-                    index = cli.read_integer(optmsg)
                 clear = raw_input("Do you wish to clear the current inventory? (y/n, default=y) ")
                 clear = False if clear.lower() == 'n' else True
-                self.LoadFromCSV(files[index], clear)
-            elif select == "7":
+                self.LoadFromCSV(f, clear)
+            elif select == "7": #quit program
                 break
-            else:
+            else: #invalid...
                 print("Invalid selection, please try again...")
 
 
