@@ -1,6 +1,6 @@
 #this file will contain the "Manager" class
 #the goal of this class is to manage the vehicles of some company...
-#a VManager object will have 2 date-members:
+#a VManager object will have 2 data-members:
 # -cname: represents the name of the company, type = str
 # -cars: represents the company's vehicle-inventory (or something alike...)
 #   internally stored in a dictionary
