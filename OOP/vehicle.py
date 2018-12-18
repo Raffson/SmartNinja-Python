@@ -39,15 +39,15 @@ class Vehicle(object):
         global _IDgen
         self._id = _IDgen #private variable, users should touch this...
         _IDgen += 1
-        self.brand = brand.upper()
-        self.model = model.upper()
-        self.km = abs(float(km))
-        self.lastservice = lastservice
+        self._brand = brand.upper()
+        self._model = model.upper()
+        self._km = abs(float(km))
+        self._lastservice = lastservice
 
     #implements what should happen when str() is called on "this" object
     def __str__(self):
         return "%s - %s with %.2fkm, last serviced at %s" % \
-               (self.brand, self.model, self.km, self.lastservice.strftime("%d/%m/%Y"))
+               (self._brand, self._model, self._km, self._lastservice.strftime("%d/%m/%Y"))
 
     #simple getter for the ID
     def GetID(self):
@@ -57,18 +57,18 @@ class Vehicle(object):
     #expects 1 mandatory argument:
     # -km: represents the new number of kilometers,
     #       type is expected to be either str, int or float
-    #return True if 'self.km' was successfully edited, False otherwise
+    #return True if 'self._km' was successfully edited, False otherwise
     def EditKM(self, km):
         if type(km) == str:
             #do some checks to verify valid input...
             if km == "": return False
             km = km[1:] if km[0] == '-' else km #remove '-' sign if present...
             if km.replace('.','',1).isdigit():
-                self.km = abs(float(km))
+                self._km = abs(float(km))
                 return True
             else: return False
         elif type(km) == int or type(km) == float:
-            self.km = abs(float(km)) #cast to float in case type(km) is int
+            self._km = abs(float(km)) #cast to float in case type(km) is int
             #otherwise float() will have no effect
             #but we still want abs() for the absolute value...
             return True
@@ -81,7 +81,7 @@ class Vehicle(object):
     #       type can either be str or datetime.date
     #   in case type = str, attempt to construct a datetime.date object
     #   in case type = datetime.date, only check if date is valid...
-    #return True if 'self.lastservice' was successfully updated, False otherwise
+    #return True if 'self._lastservice' was successfully updated, False otherwise
     def EditLastServiceDate(self, ls=dt.datetime.now().date()):
         if type(ls) == str:
             ls = ls.replace("/", "").replace("-", "") #clean dashes&slashes
@@ -96,15 +96,15 @@ class Vehicle(object):
             #just need to check if date is valid...
             if ls > dt.datetime.now().date(): return False
             #at this point, we're considered to be "safe"
-            self.lastservice = ls
+            self._lastservice = ls
             return True
         else:
             return False
 
     #a method wich returns "this" Vehicle as a CSV row
     def toCSVrow(self):
-        a,b,c = (self.brand, self.model, self.km)
-        d = self.lastservice.strftime("%d/%m/%Y")
+        a,b,c = (self._brand, self._model, self._km)
+        d = self._lastservice.strftime("%d/%m/%Y")
         return "{},{},{},{}".format(a,b,c,d)
 
 if __name__ == "__main__":
