@@ -39,9 +39,16 @@ class VManager(object):
     #implement what happens if str() is called on "this" object
     def __str__(self):
         lines = "List of cars for " + self.cname + ":\n"
+        if len(self.cars) == 0: return lines+"No cars available...\n"
         for c in self.cars:
             lines += str(c) + " : " + str(self.cars[c]) + "\n"
         return lines
+
+    def __iter__(self):
+        return self.cars.__iter__()
+
+    def __getitem__(self, key):
+        return self.cars[key]
 
     #adds a car to "this" VManager object,
     #expects 1 mandatory argument:
@@ -70,7 +77,7 @@ class VManager(object):
     #thus expecting 3 mandatory parameters:
     # -id: expecting this key to be present in self.cars, otherwise return (False, False)
     # -km: expected to be of type int, float or str
-    #       in case of str, the string must represent a valid number,
+    #       in case of str, the string must represent a valid positive number,
     #       otherwise (False, ?) will be returned
     # -ls: expected to be of type str or datetime.date, otherwise return (?, False)
     #       in case the date is in the future, (?, False) is also returned

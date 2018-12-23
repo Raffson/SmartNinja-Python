@@ -53,6 +53,16 @@ class Vehicle(object):
     def GetID(self):
         return deepcopy(self._id) #return a copy to prevent accidental overwrite...
 
+    #return "Brand - Model"
+    def GetName(self):
+        return self._brand + " - " + self._model
+
+    def GetKM(self):
+        return self._km
+
+    def GetLSDstring(self):
+        return self._lastservice.strftime("%d/%m/%Y")
+
     #methods to edit the number of kilometers,
     #expects 1 mandatory argument:
     # -km: represents the new number of kilometers,
