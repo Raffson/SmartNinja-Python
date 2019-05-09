@@ -7,6 +7,7 @@ def _is_iteratable(i):
     else:
         return True
 
+
 def sum_of_iteratable(iteratable):
     sum = 0
     if type(iteratable) == dict: iteratable = iteratable.values()
@@ -22,6 +23,7 @@ def sum_of_iteratable(iteratable):
                 continue
     return sum
 
+
 def factorial(n):
     assert type(n) == int, "Type of 'n' must be integer."
     result = 1
@@ -29,10 +31,12 @@ def factorial(n):
         result *= i
     return result
 
+
 def factorial_recursive(n):
     assert type(n) == int, "Type of 'n' must be integer."
     if n <= 1: return 1
     else: return n*factorial_recursive(n-1)
+
 
 def sum_of_first_n(n):
     assert type(n) == int, "Type of 'n' must be integer."
@@ -41,10 +45,12 @@ def sum_of_first_n(n):
         result += i
     return result
 
+
 def sum_of_first_n_recursive(n):
     assert type(n) == int, "Type of 'n' must be integer."
     if n <= 0: return 0
     else: return n+sum_of_first_n_recursive(n-1)
+
 
 def _pascal_recursive(n=10, prev=[]):
     if n >= 0:

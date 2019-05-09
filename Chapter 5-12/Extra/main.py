@@ -3,7 +3,7 @@ import quadratic_equation_solver as qes
 def read_coefficient(c):
     inp = ""
     while not inp.replace('.', '', 1).isdigit(): #while invalid input...
-        inp = raw_input("Enter a coefficient for '%s': " % c)
+        inp = input("Enter a coefficient for '%s': " % c)
         if inp == "": return 0 #if empty string, return 0
         neg = True if inp[0] == '-' else False
         inp = inp.replace('-', '', 1)
@@ -21,7 +21,7 @@ def main():
         for i in range(3): #read the 3 coefficients...
             coefficients.append(read_coefficient(labels[i]))
         print(qes.solve_quadratic(coefficients))
-        more = raw_input("Do you want to solve another equation? (y/n) ")
+        more = input("Do you want to solve another equation? (y/n) ")
 
 if __name__ == "__main__":
     main()

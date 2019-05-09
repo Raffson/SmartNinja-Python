@@ -9,7 +9,7 @@ print("Hello from main.py with __name__ = %s" % __name__)
 
 if __name__ == "__main__":
     print("main.py is the 'entry-point'...")
-    print("Evaluating numsum(5,38) : %d" % numsum(5, 38))
-    print("Evaluating numsum(22,3) : %d" % numsum(22, 3))
-    print("Evaluating numsum(4,4) : %d" % numsum(4, 4))
-    print("Evaluating numsum(13,87) : %d" % numsum(13, 87))
+    print(f"Evaluating numsum(5,38) : {numsum(5, 38)}")
+    print(f"Evaluating numsum(22,3) : {numsum(22, 3)}")
+    print(f"Evaluating numsum(4,4) : {numsum(4, 4)}")
+    print(f"Evaluating numsum(13,87) : {numsum(13, 87)}")
