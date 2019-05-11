@@ -1,0 +1,33 @@
+[
+    {
+        "attempts": 3,
+        "date": "2019-05-10 19:05:04.256033",
+        "name": "Neil Armstrong",
+        "secret": 11,
+        "wrong guesses": [
+            15,
+            8
+        ]
+    },
+    {
+        "attempts": 3,
+        "date": "2019-05-10 19:06:50.636580",
+        "name": "Gene Kranz",
+        "secret": 5,
+        "wrong guesses": [
+            15,
+            7
+        ]
+    },
+    {
+        "attempts": 4,
+        "date": "2019-05-10 18:55:01.377300",
+        "name": "Raffson",
+        "secret": 13,
+        "wrong guesses": [
+            15,
+            7,
+            11
+        ]
+    }
+]
