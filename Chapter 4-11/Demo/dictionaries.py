@@ -1,16 +1,16 @@
-'''
+"""
 Some examples on how to use dictionaries, just to show the different possibilities
-'''
+"""
 
-d = {} # initialize empty dictionary, same as: d = dict()
-print(f"d = {d}") # print the empty dictionary
-l = dict([(0, 1), ("one", 2), (2, 3)]) # convert a list of 2-tuples to a dictionary
+d = {}  # initialize empty dictionary, same as: d = dict()
+print(f"d = {d}")  # print the empty dictionary
+l = dict([(0, 1), ("one", 2), (2, 3)])  # convert a list of 2-tuples to a dictionary
 # this is possible because the first element of each tuple can represent the key,
 # while the second element of each tuple is the value
-# if python can't make such a convertion, an exception will be raised...
-print(f"l = {l}") # print the converted list
-l = dict(((0, 1), ("one", 2), (2, 3))) # convert a 3-tuple of 2-tuples to a dictionary
-print(f"l = {l}") # print the converted list
+# if python can't make such a conversion, an exception will be raised...
+print(f"l = {l}")  # print the converted list
+l = dict(((0, 1), ("one", 2), (2, 3)))  # convert a 3-tuple of 2-tuples to a dictionary
+print(f"l = {l}")  # print the converted list
 
 # add some stuff to 'd'
 d["key1"] = "value1"
@@ -52,8 +52,8 @@ print("Adding more stuff to 'd'...")
 # because d[1] already has a value...
 for i in range(10):
     if i not in d.keys():
-        d[i] = i*10 # the actual assignment
-        print(f"Added key {i} with value {i*10}") # a message to the user...
+        d[i] = i*10  # the actual assignment
+        print(f"Added key {i} with value {i*10}")  # a message to the user...
     else:
         print(f"{i} is already a key for 'd'!")
 print(f"d = {d}")
@@ -61,7 +61,7 @@ print(f"d = {d}")
 print("Looping over 'd' to print the contents...")
 # now lets loop over 'd' and print everything in a neat way...
 # d.items() returns a list of 2-tuples (key, value)
-for k, v in d.items(): # unpack each item into: k for key, v for value
+for k, v in d.items():  # unpack each item into: k for key, v for value
     print(f"d[{k}] = {v}")
 
 
@@ -89,18 +89,17 @@ print(f"d = {d}")
 
 print("Shallow vs Deep copy")
 # Shallow vs deep copy, same principle as with lists
-e = d # shallow copy
+e = d  # shallow copy
 if d is e:
     print("d IS e")
 else:
     print("d IS NOT e")
 print(f"id(d) = {id(d)} = {hex(id(d))}")
 print(f"id(e) = {id(e)} = {hex(id(e))}")
-e = d.copy() # deep copy
+e = d.copy()  # deep copy
 if d is e:
     print("d IS e")
 else:
     print("d IS NOT e")
 print(f"id(d) = {id(d)} = {hex(id(d))}")
 print(f"id(e) = {id(e)} = {hex(id(e))}")
-

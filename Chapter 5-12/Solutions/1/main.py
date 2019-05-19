@@ -1,9 +1,13 @@
-from sum import numsum #only import 'numsum' from 'sum.py'
-#if you want to import all functions from 'sum.py', use 'from sum import *'
-#alternatively you can use 'import sum',
-#but then you'd have to call 'sum.numsum(...)' instead
-#shorten the module's name with 'import sum as s',
-#which would allow you to call 's.numsum(...)'
+"""
+Basic solution for 5.1
+"""
+
+from sum import numsum  # only import 'numsum' from 'sum.py'
+# if you want to import all functions from 'sum.py', use 'from sum import *'
+# alternatively you can use 'import sum',
+# but then you'd have to call 'sum.numsum(...)' instead
+# shorten the module's name with 'import sum as s',
+# which would allow you to call 's.numsum(...)'
 
 print("Hello from main.py with __name__ = %s" % __name__)
 

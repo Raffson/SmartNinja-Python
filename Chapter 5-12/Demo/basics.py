@@ -1,6 +1,7 @@
-'''
+"""
 Some basic examples of functions
-'''
+"""
+
 
 # useless function that does nothing, just like the name suggests
 # mind that None is returned if nothing is explicitly returned...
@@ -17,7 +18,8 @@ def print_parameters(*args):
     print("End of print_parameters.")
 
 
-c2f = lambda c : c*1.8+32 # lambda function equivalent to 'celsius2fahrenheit'
+c2f = lambda c: c*1.8+32  # lambda function equivalent to 'celsius2fahrenheit'
+
 
 # function which converts degrees celsius to degrees fahrenheit,
 # c: temp in celsius, type is supposed to be 'int' or 'float'
@@ -26,7 +28,8 @@ def celsius2fahrenheit(c):
     return c*1.8+32
 
 
-f2c = lambda f : (f-32)/1.8 # lambda function equivalent to 'fahrenheit2celsius'
+f2c = lambda f: (f-32)/1.8 # lambda function equivalent to 'fahrenheit2celsius'
+
 
 # function which converts degrees celsius to degrees fahrenheit,
 # f: temp in fahrenheit, type is supposed to be 'int' or 'float'
@@ -77,10 +80,8 @@ if __name__ == "__main__":
     # in the following examples, mind the how we pass arguments,
     # the order matters, unless we specify the name of the parameters
     # also note how default arguments arguments get passed
-    print(f"maximum(7, 5) = {maximum(7, 5)}") # a=7, b=5
-    print(f"maximum(b=7, a=5) = {maximum(b=7, a=5)}") # a=5, b=7
-    print(f"maximum() = {maximum()}") # uses both default arguments
-    print(f"maximum(3) = {maximum(3)}") # a=3, b=default
-    print(f"maximum(b=-1) = {maximum(b=-1)}") # a=default, b=-1
-
-
+    print(f"maximum(7, 5) = {maximum(7, 5)}")  # a=7, b=5
+    print(f"maximum(b=7, a=5) = {maximum(b=7, a=5)}")  # a=5, b=7
+    print(f"maximum() = {maximum()}")  # uses both default arguments
+    print(f"maximum(3) = {maximum(3)}")  # a=3, b=default
+    print(f"maximum(b=-1) = {maximum(b=-1)}")  # a=default, b=-1

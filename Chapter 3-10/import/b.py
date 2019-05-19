@@ -1,11 +1,11 @@
-'''
+"""
 Simple example that demonstrates how __name__ behaves when importing,
 and how it relates to __main__
 This also demonstrates how variables (and eventually functions and classes)
 can be used from an external module
 For comments, refer to a.py since the code is practically the same,
 except for some values and names to distinguish from a.py
-'''
+"""
 
 import a
 

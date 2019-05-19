@@ -1,8 +1,9 @@
-'''
+"""
 A robust solution for homework 5.2 (12.2)
-'''
+"""
 
 import casino
+
 
 def keep_playing():
     ans = input("Do you wish to play a new game? ")
@@ -17,6 +18,7 @@ def show_best_scores():
         return False
     return True
 
+
 def main():
     while keep_playing():
         if show_best_scores():
@@ -24,6 +26,7 @@ def main():
             for score in casino.get_score_list("best.txt"):
                 print(score)
         casino.play_game()
+
 
 if __name__ == "__main__":
     main()

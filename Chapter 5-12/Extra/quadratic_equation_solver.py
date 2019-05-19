@@ -1,11 +1,13 @@
-# This file will contain some functions to solve a quadratic equation
-# Note that some functions will start with an underscore _
-# These functions are considered private,
-# although python has practically no support for private variables/functions,
-# it indicates to other users they should leave that particular entity alone...
-# BUT! if you really want to hide a function, you can always use nested functions,
-# a nested function will only be accessible by the "parent" function...
-# but then again, mind that this can decrease readability...
+"""
+This file will contain some functions to solve a quadratic equation
+Note that some functions will start with an underscore _
+These functions are considered private,
+although python has practically no support for private variables/functions,
+it indicates to other users they should leave that particular entity alone...
+BUT! if you really want to hide a function, you can always use nested functions,
+a nested function will only be accessible by the "parent" function...
+but then again, mind that this can decrease readability...
+"""
 from math import sqrt
 
 
@@ -16,19 +18,20 @@ def _get_discriminant(a, b, c):
 
 '''
 #redundant in case we use the generic approach
-def _real_solutions(a, b, D):
-    return ((-b+sqrt(D))/(2*a), (-b-sqrt(D))/(2*a))
+def _real_solutions(a, b, d):
+    return ((-b+sqrt(d))/(2*a), (-b-sqrt(d))/(2*a))
 '''
+
 
 # calculates complex solutions
 # a: coefficient a from the equation ax^2 +bx + c
 # b: coefficient b from the equation ax^2 +bx + c
-# D: discriminant of the equation
+# d: discriminant of the equation
 # returns tuple (real, imaginary)
-# note that if D > 0, only real solutions exist and thus we only have to
+# note that if d > 0, only real solutions exist and thus we only have to
 # add/subtract the imaginary part from the real part
-def _complex_solutions(a, b, D):
-    return -b / (2 * a), sqrt(abs(D)) / (2 * a)
+def _complex_solutions(a, b, d):
+    return -b / (2 * a), sqrt(abs(d)) / (2 * a)
 
 
 # checks if the given coefficients are valid
@@ -50,44 +53,47 @@ def _check_coefficients(coeffs):
 # coeffs is obviously the name, followed by '=[1,2,3]'
 #  which represents the default argument...
 # This means 'solve_quadratic' can be called with no argument
-# in such a case, coeffs recieves the default list [1,2,3]
-def solve_quadratic(coeffs=[1, 2, 3]):
-    result = _check_coefficients(coeffs)
-    if result != "": return result
+# in such a case, coeffs receives the default list [1,2,3]
+def solve_quadratic(coeffs=(1, 2, 3)):
+    coeffs = list(coeffs) if type(coeffs) == tuple else coeffs
+    res = _check_coefficients(coeffs)
+    if res != "":
+        return res
     # we will write our results to this string
     # the idea is to return the string at the end of the function...
     a, b, c, = (coeffs[0], coeffs[1], coeffs[2])  # make a tuple and unpack
     aa = str(a) if a > 0 else f"({a})"
     bb = str(b) if b > 0 else f"({b})"
     cc = str(c) if c > 0 else f"({c})"
-    result += "Solving quadratic equation: {}x^2 + {}x + {}\n".format(aa, bb, cc)
-    D = _get_discriminant(a, b, c)
-    result += "D = b^2 - 4ac = {}\n".format(D)
-    result += "Solution:\n" if D == 0 else "Solutions:\n"
+    res += "Solving quadratic equation: {}x^2 + {}x + {}\n".format(aa, bb, cc)
+    d = _get_discriminant(a, b, c)
+    res += "D = b^2 - 4ac = {}\n".format(d)
+    res += "Solution:\n" if d == 0 else "Solutions:\n"
     '''
-    #The following approach seperates real solutions from complex ones,
+    #The following approach separates real solutions from complex ones,
     #though we can make our algorithm more generic...
-    if D >= 0: # real solution(s) (-b +- sqrt(D)) / (2*a)
-        x1, x2 = _real_solutions(a,b,D)
+    if d >= 0: # real solution(s) (-b +- sqrt(d)) / (2*a)
+        x1, x2 = _real_solutions(a,b,d)
         result += "x1 = {}\n".format(x1)
-        if D > 0: result += "x2 = {}\n".format(x2)
-    else: # complex solutions (-b / (2*a)) +- (i * (sqrt(D) / (2*a)))
+        if d > 0: result += "x2 = {}\n".format(x2)
+    else: # complex solutions (-b / (2*a)) +- (i * (sqrt(d) / (2*a)))
         # 2 parts, real and imaginary...
-        real, imag = _complex_solutions(a,b,D)
+        real, imag = _complex_solutions(a,b,d)
         result += "x1 = {} + {}i\n".format(real, imag)
         result += "x2 = {} - {}i\n".format(real, imag)
     '''
-    # Note that (-b +- sqrt(D)) / (2*a) = (-b / (2*a)) +- (sqrt(D) / (2*a))
+    # Note that (-b +- sqrt(d)) / (2*a) = (-b / (2*a)) +- (sqrt(d) / (2*a))
     # thus, we can use '_complex_solutions',
     # in case we're dealing with a real solution,
-    # simply add real and imaginary parts together,
+    # simply add real (r) and imaginary (i) parts together,
     # otherwise we have to keep them seperate...
-    real, imag = _complex_solutions(a, b, D)
-    appendix = ("i", "i") if D < 0 \
-        else (f" = {real+imag}", f" = {real-imag}")
-    result += f"x1 = {real} + {imag}{appendix[0]}\n"
-    if D != 0: result += f"x2 = {real} - {imag}{appendix[1]}\n"
-    return result
+    r, i = _complex_solutions(a, b, d)
+    appendix = ("i", "i") if d < 0 \
+        else (f" = {r + i}", f" = {r - i}")
+    res += f"x1 = {r} + {i}{appendix[0]}\n"
+    if d != 0:
+        res += f"x2 = {r} - {i}{appendix[1]}\n"
+    return res
 
 
 if __name__ == "__main__":
@@ -98,9 +104,9 @@ if __name__ == "__main__":
     print("==================================")
     print("Testing _get_discriminant:\t", end='')
 
-    D = _get_discriminant(1, 2, 3)
-    assert D == -8, "Test for _get_discriminant failed,\n" \
-                    f"target = 2^2 - 4*1*3 = 4 - 12 = -8\nactual = {D}"
+    d = _get_discriminant(1, 2, 3)
+    assert d == -8, "Test for _get_discriminant failed,\n" \
+                    f"target = 2^2 - 4*1*3 = 4 - 12 = -8\nactual = {d}"
 
     print("\t[PASS!]")
     print("Testing _complex_solutions:\t", end='')

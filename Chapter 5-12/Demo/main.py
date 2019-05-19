@@ -1,7 +1,7 @@
-'''
-Quick example of how to import basics.py, and use farenheit2celsius
-'''
+"""
+Quick example of how to import basics.py, and use fahrenheit2celsius
+"""
 
 import basics
 
-print("%.2f" % basics.farenheit2celsius(100))
+print("%.2f" % basics.fahrenheit2celsius(100))

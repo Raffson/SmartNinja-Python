@@ -1,20 +1,20 @@
-'''
+"""
 A robust solution for homework 5.2 (12.2),
 but instead of just printing the scores, we write them to files,
 score_list.txt contains all scores while best.txt only contains the top 3
-'''
+"""
 
 import random
 import datetime as dt
-import os # to check if files exist
+import os  # to check if files exist
 import json
 
 
 def get_score_list(filename):
     score_list = []
-    if os.path.isfile(filename): # check if file exists
+    if os.path.isfile(filename):  # check if file exists
         with open(filename, "r") as scorefile:
-            score_list = json.loads(scorefile.read()) # load the data...
+            score_list = json.loads(scorefile.read())  # load the data...
     return score_list
 
 
@@ -23,7 +23,7 @@ def play_game(game_level="easy"):
     wrong_guesses = []
 
     name = input("Please enter your name: ")
-    name = name if name != "" else "Anonymous" # if no name was entered => Anonymous
+    name = name if name != "" else "Anonymous"  # if no name was entered => Anonymous
 
     now = dt.datetime.now()
     print(f"Starting game @ {now}")
@@ -53,11 +53,11 @@ def play_game(game_level="easy"):
             wrong_guesses.append(guess)
 
     # once we get here, we know the player guessed to correct number...
-    score_list.append({"attempts" : count,
-                       "date" : str(now),
-                       "name" : name,
-                       "secret" : secret,
-                       "wrong guesses" : wrong_guesses})
+    score_list.append({"attempts": count,
+                       "date": str(now),
+                       "name": name,
+                       "secret": secret,
+                       "wrong guesses": wrong_guesses})
     write_score("score_list.txt", score_list)
     score_list = sorted(score_list, key=lambda e: e["attempts"])
     write_score("best.txt", score_list[:3])
@@ -66,4 +66,3 @@ def play_game(game_level="easy"):
 def write_score(filename, score_list):
     with open(filename, "w") as scorefile:
         json.dump(score_list, scorefile, indent=4)
-

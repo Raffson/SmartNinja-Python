@@ -1,11 +1,11 @@
-'''
+"""
 Some examples on how to use lists, just to show the different possibilities
-'''
+"""
 
-empty_list = [] # create an empty list, same as: empty_list = list()
-l1 = [1, 2, 3] # create list with elements 1, 2 & 3
-l2 = list(range(1, 4)) # another way to create a list with elements 1, 2 & 3
-l3 = [3, 2, 1] # create a list with elements 3, 2 & 1
+empty_list = []  # create an empty list, same as: empty_list = list()
+l1 = [1, 2, 3]  # create list with elements 1, 2 & 3
+l2 = list(range(1, 4))  # another way to create a list with elements 1, 2 & 3
+l3 = [3, 2, 1]  # create a list with elements 3, 2 & 1
 
 # print the lists...
 print(f"empty_list = {empty_list}")
@@ -40,22 +40,22 @@ print(f"l1 == l3 is {l1 == l3}")
 
 print("Enough of numbers, let's play with letters...")
 
-wlist = list("Word") # convert "Word" in a list -> ['W', 'o', 'r', 'd']
+wlist = list("Word")  # convert "Word" in a list -> ['W', 'o', 'r', 'd']
 print(f"list(\"Word\") = {wlist}")
-print(f"First letter of 'Word' = wlist[0] = {wlist[0]}") # access 0th element
+print(f"First letter of 'Word' = wlist[0] = {wlist[0]}")  # access 0th element
 # REMEMBER! We start counting from 0...
 
 print("Looping over 'Word' and 'wlist'...")
 
-for letter in "Word": # when looping over a string,
+for letter in "Word":  # when looping over a string,
     # it automatically splits the letters into a list
     print(letter)
 
-for letter in reversed(wlist): # now looping over an actual list,
+for letter in reversed(wlist):  # now looping over an actual list,
     # but to make things more fun, we reverse it using a built-in function
     print(letter)
 
-print(f"wlist = {wlist}") # mind that wlist hasn't changed,
+print(f"wlist = {wlist}")  # mind that wlist hasn't changed,
 # 'reversed(wlist)' does not adjust wlist unless we assign its result back to wlist
 # i.e. writing: wlist = reversed(wlist)
 # OR similar to sorted() & list.sort(), there's also a list.reverse()
@@ -68,11 +68,11 @@ print(f"mix = {mix}")
 
 print("Membership operator:")
 # demonstrating membership operator, more thoroughly
-print(f"\"Two\" in mix = {'Two' in mix}") # True
-print(f"\"Three\" in mix = {'Three' in mix}") # False
-print(f"1 not in mix = {1 not in mix}") # False
-print(f"False not in mix = {False not in mix}") # True
-print(f"False in mix[-1] = {False in mix[-1]}") # True
+print(f"\"Two\" in mix = {'Two' in mix}")  # True
+print(f"\"Three\" in mix = {'Three' in mix}")  # False
+print(f"1 not in mix = {1 not in mix}")  # False
+print(f"False not in mix = {False not in mix}")  # True
+print(f"False in mix[-1] = {False in mix[-1]}")  # True
 
 print("Looping over lists:")
 # next up are two ways to loop over 'mix',
@@ -84,8 +84,8 @@ for i in range(len(mix)):
     print(f"mix[{i}] = {mix[i]}")
 
 print("List indexing and sub-lists:")
-print(f"mix[-1] = {mix[-1]}") # last element
-print(f"mix[-2] = {mix[-2]}") # second last element
+print(f"mix[-1] = {mix[-1]}")  # last element
+print(f"mix[-2] = {mix[-2]}")  # second last element
 print(f"mix[2:] = {mix[2:]}")
 # sub-list starting from index 2 (3rd element) and further
 print(f"mix[:2] = {mix[:2]}")
@@ -96,8 +96,8 @@ print(f"mix[2:4] = {mix[2:4]}")
 print("Deep copy VS Shallow copy:")
 
 some_list = [3, 4, 5]
-another_list = some_list # make a copy
-another_list[0] += 1 # add one to first element to see what happens
+another_list = some_list  # make a copy
+another_list[0] += 1  # add one to first element to see what happens
 print(f"some_list    = {some_list}")
 print(f"another_list = {another_list}")
 # both are the same, because a shallow copy was used,
@@ -110,8 +110,8 @@ print(f"id(some_list) = {id(some_list)} = {hex(id(some_list))}")
 print(f"id(another_list) = {id(another_list)} = {hex(id(another_list))}")
 # mind that the id's are equal
 
-another_list = some_list.copy() # now make a deep copy
-another_list[0] -= 1 # subtract one from first element, giving [3, 4, 5] again
+another_list = some_list.copy()  # now make a deep copy
+another_list[0] -= 1  # subtract one from first element, giving [3, 4, 5] again
 print(f"some_list    = {some_list}")
 print(f"another_list = {another_list}")
 # no longer the same because a deep copy was used,
@@ -125,7 +125,7 @@ print(f"id(another_list) = {id(another_list)} = {hex(id(another_list))}")
 # mind that the id's are different now
 
 print("Deleting elements from a list:")
-del some_list[0] # delete first (=0th) element of some_list
+del some_list[0]  # delete first (=0th) element of some_list
 print(f"some_list after deleting first element = {some_list}")
 
 print("Appending an element to a list:")
@@ -142,8 +142,7 @@ print(f"some_list after clear() = {some_list}")
 
 print("What happens when we try to access an element which is out of bounds:")
 print(f"len(another_list) = {len(another_list)}")
-try: # len(another_list) should be 3, so valid indices are 0, 1 & 2
+try:  # len(another_list) should be 3, so valid indices are 0, 1 & 2
     print(f"another_list[3] = {another_list[3]}")
 except Exception as e:
     print("Exception occurred:", e)
-

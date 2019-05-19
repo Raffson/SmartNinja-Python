@@ -1,6 +1,6 @@
-'''
+"""
 Basic solution for the mood-checker
-'''
+"""
 
 mood = input("What's your mood today? ")
 
