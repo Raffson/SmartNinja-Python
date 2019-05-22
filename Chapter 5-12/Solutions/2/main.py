@@ -5,23 +5,16 @@ A robust solution for homework 5.2 (12.2)
 import casino
 
 
-def keep_playing():
-    ans = input("Do you wish to play a new game? ")
-    if ans.upper() == "N" or ans.upper() == "NO":
-        return False
-    return True
-
-
-def show_best_scores():
-    ans = input("Do you wish to see the best scores before starting? ")
+def question(q):
+    ans = input(q)
     if ans.upper() == "N" or ans.upper() == "NO":
         return False
     return True
 
 
 def main():
-    while keep_playing():
-        if show_best_scores():
+    while question("Do you wish to play a new game? "):
+        if question("Do you wish to see the best scores before starting? "):
             print("Top 3 scores are: ")
             for score in casino.get_score_list("best.txt"):
                 print(score)
