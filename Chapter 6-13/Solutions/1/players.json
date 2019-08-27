@@ -1,0 +1,17 @@
+[
+    {
+        "first_name": "Test",
+        "last_name": "This",
+        "height_cm": 175.0,
+        "weight_kg": 74.0
+    },
+    {
+        "first_name": "James",
+        "last_name": "Lebron",
+        "height_cm": 203.0,
+        "weight_kg": 113.0,
+        "points": 27,
+        "rebounds": 7,
+        "assists": 13
+    }
+]
