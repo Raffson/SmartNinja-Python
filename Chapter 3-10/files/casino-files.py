@@ -18,9 +18,8 @@ best = None  # initialize best to None, in case score.txt doesn't exist
 if os.path.isfile("score.txt"):  # checks if score.txt is present in folder of execution
     # mind this "folder of execution" --> check notes at bottom
     with open("score.txt", "r") as scorefile:
-        best = int(scorefile.read())  # this is dangerous without checks!
-        # if the user decides to change the content of score.txt,
-        # it may contain invalid data and cause an exception
+        best = scorefile.read()
+        best = int(best) if best.isdigit() else None
 
 count = 0  # keep a count for the number of attempts,
 # initializing on 0 means we need to increment count at the beginning of the loop,
@@ -47,9 +46,9 @@ print("As ALWAYS, have a good one!")  # mind indentation, i.e. no longer part of
 # write the best attempt to score.txt
 with open("score.txt", "w") as file:
     if best is None or best > count:
-        file.write(str(count))
-    else:
-        file.write(str(best))
+        best = count
+    file.write(str(best))
+
 
 '''
 The "folder of execution" is basically the folder from which you ran your
