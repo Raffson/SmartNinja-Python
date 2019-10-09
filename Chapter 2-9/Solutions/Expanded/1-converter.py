@@ -18,7 +18,7 @@ while True:  # loop indefinitely, we'll break if needed
         continue
     converted = dist*0.621371192 if unit == "kilometers" else dist/0.621371192
     # infer the converted unit, used for screen-output
-    cunit = "miles" if unit == "kilomets" else "kilometers"
+    cunit = "miles" if unit == "kilometers" else "kilometers"
     print("%f %s = %f %s" % (dist, unit, converted, cunit))
     # now let's print the same line, but with the distances rounded to 2 decimals
     print("%.2f %s = %.2f %s" % (dist, unit, converted, cunit))
