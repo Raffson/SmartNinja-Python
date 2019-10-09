@@ -49,7 +49,7 @@ for letter in reversed(wtuple):  # now looping over an actual tuple,
 
 print(wtuple)  # mind that wtuple hasn't changed,
 # 'reversed(wtuple)' does not adjust wtuple unless we assign its result back to wtuple
-# i.e. writing: wtuple = reversed(wtuple)
+# i.e. writing: wtuple = tuple(reversed(wtuple))
 
 mix = (1, "Two", 3.0, '4', None, (True, False, wtuple))
 print(mix)
@@ -101,10 +101,7 @@ print(f"id(another_tuple) = {id(another_tuple)} = {hex(id(another_tuple))}")
 # mind that the id's are equal
 
 
-from copy import deepcopy  # normally we put imports at the top,
-# but for demonstration purposes we'll leave it here...
-# we need this because a tuple does not have a method 'copy()' like lists & dictionaries
-another_tuple = deepcopy(some_tuple)  # now make a deep copy
+another_tuple = tuple(list(some_tuple))  # making a deep copy
 try:
     another_tuple[0] -= 1  # will cause an exception because tuple is immutable
 except Exception as e:
@@ -154,4 +151,3 @@ try:  # len(another_tuple) should be 3, so valid indices are 0, 1 & 2
     print(f"another_tuple[3] = {another_tuple[3]}")
 except Exception as e:
     print("Exception occurred:", e)
-

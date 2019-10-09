@@ -13,7 +13,7 @@ print(f"l1 = {l1}")
 print(f"l2 = {l2}")
 print(f"l3 = {l3}")
 
-# check is lists are equal (order matters for list, but not for set)
+# check if lists are equal (order matters for list, but not for set)
 # a set is basically a special list for which order doesn't matter
 # and no duplicate elements,
 # i.e. if we add an element that's already in the set, nothing will happen
@@ -87,7 +87,7 @@ print("List indexing and sub-lists:")
 print(f"mix[-1] = {mix[-1]}")  # last element
 print(f"mix[-2] = {mix[-2]}")  # second last element
 print(f"mix[2:] = {mix[2:]}")
-# sub-list starting from index 2 (3rd element) and further
+# sub-list starting from index 2 (3rd element) until the last
 print(f"mix[:2] = {mix[:2]}")
 # sub-list with all elements below index 2, thus first 2 elements
 print(f"mix[2:4] = {mix[2:4]}")
@@ -130,6 +130,10 @@ print(f"some_list after deleting first element = {some_list}")
 
 print("Appending an element to a list:")
 some_list.append(4)
+print(f"some_list after appending 4 = {some_list}")
+
+print("Inserting an element to a list with a given index:")
+some_list.insert(1, 0)
 print(f"some_list after appending 4 = {some_list}")
 
 print("Adding lists to each other:")
