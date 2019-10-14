@@ -34,6 +34,7 @@ for person in people:
             break
     if suspect is True:
         print("%s is our perpetrator!" % person.upper())
+        break
 
 end = dt.datetime.now()
 print(f"Runtime = {end-start}")
