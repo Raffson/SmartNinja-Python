@@ -18,7 +18,10 @@ def main():
             print("Top 3 scores are: ")
             for score in casino.get_score_list("best.txt"):
                 print(score)
-        casino.play_game()
+        if question("Do you wish to play hard? (y/n) "):
+            casino.play_game("hard")
+        else:
+            casino.play_game()
 
 
 if __name__ == "__main__":
