@@ -1,5 +1,5 @@
 """
-Basic solution for 5.1
+Basic solution for 5.1/12.1
 """
 
 from sum import numsum  # only import 'numsum' from 'sum.py'

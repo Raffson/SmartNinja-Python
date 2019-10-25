@@ -1,5 +1,5 @@
 """
-Class definitions for players, OOP part of 6.1
+Class definitions for players, OOP part of 6.1/13.1
 """
 
 

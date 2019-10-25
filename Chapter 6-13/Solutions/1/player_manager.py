@@ -1,5 +1,5 @@
 """
-Robust (OOP) solution for 6.1
+Robust (OOP) solution for 6.1/13.1
 """
 import players as p
 import os
