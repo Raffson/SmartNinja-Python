@@ -4,26 +4,8 @@ Robust (procedural) solution for 6.1
 import players as p
 import os
 import json
+from helpers import read_positive_float, read_positive_integer
 
-
-# will read & return a float, negative sign will simply be ignored...
-# thus returning only positive floats
-def read_positive_number(msg="Enter a real number: "):
-    f = input(msg)
-    f = f[1:] if f != "" and f[0] == '-' else f  # ignore negative sign if present
-    while f == "" or not f.replace('.', '', 1).isdigit():
-        print("Invalid number was given, please try again...")
-        f = input(msg)
-    return float(f)
-
-
-# will read & return a positive integer
-def read_integer(msg="Enter an integer: "):
-    integer = input(msg)
-    while not integer.isdigit():
-        print("The given input is invalid, please try again...")
-        integer = input(msg)
-    return int(integer)
 
 
 def read_players():
@@ -75,19 +57,19 @@ def add_player(players):
     choice = input("What kind of player do you wish to add? (enter corresponding number) ")
     first_name = input("Enter a first name: ")
     last_name = input("Enter a last name: ")
-    height_cm = read_positive_number("Enter a height in cm: ")
-    weight_kg = read_positive_number("Enter a weight in kg: ")
+    height_cm = read_positive_float("Enter a height in cm: ")
+    weight_kg = read_positive_float("Enter a weight in kg: ")
     if choice == "0":
         players.append(p.Player(first_name, last_name, height_cm, weight_kg))
     elif choice == "1":
-        points = read_integer("Enter a number of points: ")
-        rebounds = read_integer("Enter a number of rebounds: ")
-        assists = read_integer("Enter a number of assists: ")
+        points = read_positive_integer("Enter a number of points: ")
+        rebounds = read_positive_integer("Enter a number of rebounds: ")
+        assists = read_positive_integer("Enter a number of assists: ")
         players.append(p.BasketballPlayer(first_name, last_name, height_cm, weight_kg, points, rebounds, assists))
     elif choice == "2":
-        goals = read_integer("Enter a number of goals: ")
-        yc = read_integer("Enter a number of yellow cards: ")
-        rc = read_integer("Enter a number of red cards: ")
+        goals = read_positive_integer("Enter a number of goals: ")
+        yc = read_positive_integer("Enter a number of yellow cards: ")
+        rc = read_positive_integer("Enter a number of red cards: ")
         players.append(p.FootballPlayer(first_name, last_name, height_cm, weight_kg, goals, yc, rc))
 
 
