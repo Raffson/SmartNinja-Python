@@ -3,6 +3,7 @@ Quick example illustrating the difference between
 pass by value & pass by reference
 """
 
+
 class ExampleObject:
     def __init__(self):
         self.var1 = "Hello"
@@ -10,6 +11,7 @@ class ExampleObject:
 
     def __str__(self):
         return f"{self.var1} - {self.var2}"
+
 
 def pass_by(a):
     if type(a) == int:
