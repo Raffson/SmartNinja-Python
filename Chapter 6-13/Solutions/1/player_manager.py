@@ -11,7 +11,10 @@ from helpers import read_positive_float, read_positive_integer
 class PlayerManager:
 
     def __init__(self, players=[]):
-        self.players = players
+        if type(players) != list:
+            print("Bad argument provided: 'players' should be a list, overwriting with empty list...")
+            players = []
+        self.players = players  # essentially a list of players is all we need...
 
     def read_players(self):
         players = []
