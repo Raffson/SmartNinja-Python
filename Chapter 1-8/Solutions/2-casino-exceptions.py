@@ -24,11 +24,12 @@ else:
     # executed only if no exception occurred in the 'try' block
     # raise RuntimeError #uncomment to see the effects on the output
     if guess == secret:
-        # four ways to print same thing...
+        # 5 ways to print same thing...
         print("You guessed it - congratulations! It's number " + str(secret) + " :)")
         print("You guessed it - congratulations! It's number %d :)" % secret)
         print("You guessed it - congratulations! It's number {} :)".format(secret))
         print("You guessed it - congratulations! It's number", secret, ":)")
+        print(f"You guessed it - congratulations! It's number {secret} :)")
     else:
         print("Too bad, you guessed wrong...")
     # raise RuntimeError #uncomment to see the effects on the output
