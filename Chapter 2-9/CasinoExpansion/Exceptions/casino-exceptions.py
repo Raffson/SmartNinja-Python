@@ -11,9 +11,10 @@ Refer to the comments in the code for more details.
 """
 import random
 
+
 secret = random.randint(1, 30)
 
-guess = None  # initialize guess,
+guess = secret  # initialize guess,
 # otherwise the program will crash the first time we pass line 19
 
 while guess != secret:
@@ -21,7 +22,7 @@ while guess != secret:
         # always executed...
         guess = int(input("Guess the secret number (between 1 and 30): "))
     except ValueError:
-        # executed if and only if an exception occured in the 'try' block
+        # executed if and only if an exception occurred in the 'try' block
         print("This not an integer...")
         # raise RuntimeError #uncomment to see the effects on the output
     else:
@@ -38,6 +39,7 @@ while guess != secret:
     finally:
         # this will ALWAYS be executed, whether or not an exception is raised
         # in the 'try', 'except' or 'else' block...
-        print("Maybe next time you'll get luckier ;)")
+        if guess != secret:
+            print("Maybe next time you'll get luckier ;)")
         # mind how this line is printed, even when we break out at line 36,
         # which goes against what we would expect...
