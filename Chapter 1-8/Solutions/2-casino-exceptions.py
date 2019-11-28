@@ -29,7 +29,7 @@ else:
         print("You guessed it - congratulations! It's number %d :)" % secret)
         print("You guessed it - congratulations! It's number {} :)".format(secret))
         print("You guessed it - congratulations! It's number", secret, ":)")
-        print(f"You guessed it - congratulations! It's number {secret} :)")
+        print(f"You guessed it - congratulations! It's number {secret} :)")  # python3 only
     else:
         print("Too bad, you guessed wrong...")
     # raise RuntimeError #uncomment to see the effects on the output
