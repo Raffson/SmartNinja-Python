@@ -134,7 +134,7 @@ print(f"some_list after appending 4 = {some_list}")
 
 print("Inserting an element to a list with a given index:")
 some_list.insert(1, 0)
-print(f"some_list after appending 4 = {some_list}")
+print(f"some_list after inserting 0 at index 1 = {some_list}")
 
 print("Adding lists to each other:")
 combined = some_list + another_list
