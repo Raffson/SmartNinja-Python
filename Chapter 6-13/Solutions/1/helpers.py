@@ -11,6 +11,7 @@ def read_positive_float(msg="Enter a real number: "):
     while f == "" or not f.replace('.', '', 1).isdigit():
         print("Invalid number was given, please try again...")
         f = input(msg)
+        f = f[1:] if f != "" and f[0] == '-' else f  # ignore negative sign if present
     return float(f)
 
 

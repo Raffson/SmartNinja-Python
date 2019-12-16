@@ -7,7 +7,6 @@ import json
 from helpers import read_positive_float, read_positive_integer
 
 
-
 def read_players():
     players = []
     read = input("Do you wish to load the contents of 'players.json'? (Y/N) ").upper()

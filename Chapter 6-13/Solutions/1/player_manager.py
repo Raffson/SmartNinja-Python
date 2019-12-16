@@ -7,7 +7,6 @@ import json
 from helpers import read_positive_float, read_positive_integer
 
 
-
 class PlayerManager:
 
     def __init__(self, players=[]):
