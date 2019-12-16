@@ -3,8 +3,9 @@ Slightly expanded example using the OpenWeatherMap API
 """
 import json
 from urllib.request import urlopen  # to send & receive over HTTP
+import api_key as ak  # File containing my API key, file is in gitignore to avoid pushing it
 
-api_key = "YOUR API KEY HERE"  # insert your own API key!!!
+api_key = ak.apikey  # insert your own API key!!! (as a string)
 
 response = urlopen('http://api.openweathermap.org/data/2.5/weather?q=Antwerp,be&units=metric&appid=' + api_key)
 
